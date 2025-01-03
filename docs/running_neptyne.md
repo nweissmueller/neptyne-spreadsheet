@@ -67,9 +67,11 @@ The server will start and show some debugging output. You may see warnings about
 
 1. The server will print a URL with a shared secret
 2. Open your web browser and go to:
+
    ```
    http://localhost:8878?sharedSecret=MiWzLl9GpH
    ```
+
    This is the current shared secret as of December 2023.
 
 3. You should see the Neptyne interface load. If you see "Invalid token", double-check that you've copied the entire URL including the shared secret exactly as shown above.
@@ -77,21 +79,29 @@ The server will start and show some debugging output. You may see warnings about
 ## Troubleshooting Guide
 
 ### 1. Port Already in Use
+
 If you see this error:
+
 ```
 OSError: [Errno 48] Address already in use
 ```
+
 Solution: Change the port number:
+
 ```bash
 python server/application.py --sqlite-db neptyne.db --debug --port 8879
 ```
 
 ### 2. Module Not Found
+
 If you see:
+
 ```
 ModuleNotFoundError: No module named 'neptyne'
 ```
+
 Solution:
+
 ```bash
 # Make sure you're in the neptyne-spreadsheet directory
 cd ~/Documents/neptyne-spreadsheet
@@ -100,13 +110,17 @@ pip install -e .
 ```
 
 ### 3. Python Version Issues
+
 If you see any import or syntax errors, verify your Python version:
+
 ```bash
 python --version  # Should be 3.11.x
 ```
 
 ### 4. Shared Secret Issues
+
 If you can't find your shared secret:
+
 ```bash
 # Read it directly from the config file
 python3.11 -c "import json; print(json.load(open(os.path.expanduser('~/.neptyne.json')))['shared_secret'])"
@@ -131,7 +145,9 @@ The current shared secret is: MiWzLl9GpH
    - Shared Secret: MiWzLl9GpH
 
 ### For Public Access
+
 If you need to access your Neptyne instance from outside your network:
+
 1. Install ngrok: `brew install ngrok` (on macOS)
 2. Run: `ngrok http 8878`
 3. Use the https URL provided by ngrok in the GSheets add-on settings
@@ -139,6 +155,7 @@ If you need to access your Neptyne instance from outside your network:
 ## Verification Steps
 
 After setup, verify your installation:
+
 1. Server starts without errors
 2. Web interface loads at http://localhost:8878?sharedSecret=MiWzLl9GpH
 3. You can create a new sheet
